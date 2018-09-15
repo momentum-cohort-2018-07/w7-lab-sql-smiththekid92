@@ -63,10 +63,15 @@ LIMIT 1
 *List all client names with their project names (multiple rows for one client is fine). Make sure that clients still show up even if they have no projects.*
 
 SELECT clients.name, projects.name
-FROM clients LEFT JOIN projects
+FROM clients 
+LEFT JOIN  projects ON projects.client_id = clients.id
 GROUP BY clients.name, projects.name
 
 
 # Question 9:
 *Find all developers who have written no comments*
 
+SELECT developers.id, name, comment
+FROM developers
+LEFT JOIN comments on comments.developer_id = developers.id
+WHERE comment is NULL 
